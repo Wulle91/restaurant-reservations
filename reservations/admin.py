@@ -1,6 +1,10 @@
 from django.contrib import admin
-from .models import Reservation
+from .models import Reservation, Date
+from django_summernote.admin import SummernoteModelAdmin
 
 
-# Register your models here.
-admin.site.register(Reservation)
+@admin.register(Reservation, Date)
+class PostAdmin(SummernoteModelAdmin):
+    summernote_fields = ('content')
+
+#admin.site.register(Reservation)

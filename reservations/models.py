@@ -13,8 +13,13 @@ class Reservation(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     comment = models.TextField()
     staus = models.IntegerField(choices=STATUS, default=0)
+    
+    def __str__(self):
+        return f"Reservation for {self.name}"
 
 
 class Date(models.Model):
     reservation_date = models.DateTimeField()
     table = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+
+    
