@@ -22,5 +22,5 @@ def sho_dates(request):
     return render(request, 'index.html', context)
 
 
-
-
+def comments(request):
+    return render(request, 'home.html')

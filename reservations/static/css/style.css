@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    margin-top: -100px;
+    margin-top: -550px;
     border-radius: 5%;
     padding: 2%;
     
@@ -37,26 +37,58 @@
 }
 
 
-
-#table1 {
-    height: 50px;
-    width: 50px;
-    background-color: red;
+#image-container {
+    width: 638px;
+    background-color: aqua;
+    background-image: url('https://res.cloudinary.com/dzwpkjbhq/image/upload/v1682368129/static/summernote/Coffee-Shop-Layout-3D_pbdlsm.jpg');
+    background-repeat: no-repeat;
+    height: 489px;
+    padding-left: 6px;
 }
+
 
 #tables {
     margin-top: 100px;
     width: 100%;
     display: flex;
     justify-content: space-around;
+    
+    
+    height: 500px;
+    align-items: center;
+    padding: auto auto;
 }
 
+.Table {
+    background-color: rgba(61, 197, 84, 0.6);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 70px;
+    margin-top: 145px;
+    margin-right: 65px;  
+    margin-bottom: 0px;
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+#Table4{
+    position: absolute;
+    margin-left: -450px;
+    margin-top: 95px;
+}
+
+#Table5{
+    position: absolute;
+    margin-left: 391px;
+    margin-top: 41px;
+}
 
 #tables button:hover {
     background-color: rgb(187, 34, 34);
 }
 
-#tables button {
+.Table button {
     width: 150px;
     height: 100px;
     background-color: red;
@@ -66,10 +98,7 @@
     font-size: 30px;
 }
 
-.labl {
-    display : inline-block;
-    width: 400px;
-}
+
 .labl > input{ /* HIDE RADIO */
     visibility: hidden; /* Makes input not-clickable */
     position: absolute; /* Remove input from document flow */
@@ -82,4 +111,24 @@
 .labl > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
     background-color: #ffd6bb;
     border: 1px solid #ff6600;
+}
+
+
+#hero-image {
+    width: 100%;
+}
+
+#hero-image img{
+    width: 100%;
+}
+
+#title {
+    width: 100%;
+    height: 300px;
+    padding-top: 100px;
+    text-align: center;
+}
+
+#title h1 {
+    
 }
