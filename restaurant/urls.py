@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from reservations.views import sho_dates, pick_a_date_and_table
+from reservations.views import sho_dates
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', sho_dates, name='dates'),
+
 ]

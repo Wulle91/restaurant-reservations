@@ -4,5 +4,4 @@ from django_summernote.admin import SummernoteModelAdmin
 
 
 admin.site.register(Date)
-
-#admin.site.register(Reservation)
+admin.site.register(Reservation)

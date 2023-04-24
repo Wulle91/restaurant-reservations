@@ -57,6 +57,7 @@
         <!-- Content Goes here -->
         {% endblock content %}
     </main>
+  
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">
         <p class="m-0 text-center text-white">Made by Code Instituters</p>
@@ -66,30 +67,44 @@
             <i class="fab fa-youtube-square ms-3"></i></p>
     </footer>
 
-   <div id="dates"></div>
+   <div id="dat"></div>
 
 
     <script>
-        var occupied_dates = []
-        var occupied_tables = []
+        var occupied_dates = [];
+        var occupied_tables = [];
         {% for date in dates %}
             var date = "{{date.reservation_date}}"
             var table = "{{date.table}}"
             occupied_dates.push(date)
             occupied_tables.push(table)
         {% endfor %}
-
-
-        var text_div = document.getElementById('dates')
+        
+        var taables = []
+      
+        {% for reservation in reservations %}
+            console.log(book)
+            var tableeee = "{{reservation.name}}"
+            taables.push(tableeee)   
+        {% endfor %}
+        
+      
+      
+    
         console.log(occupied_dates)
         console.log(occupied_tables)
+        console.log(taables)
        
         
         var date = document.getElementById('date').addEventListener("change", searchDates);
+        var tables = document.getElementsByClassName('Table');
+        for (var i = 0; i < tables.length; i++) {
+            tables[i].addEventListener("click", inputDataWindow);
+        }
         
         function searchDates() {
             for (let i=0; i<occupied_dates.length; i++) {
-                document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='lightblue'
+                document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='white'
             }
             let clickedDate = new Date(event.target.value); 
             formattedDate = clickedDate.toLocaleDateString("en-US", { 
@@ -98,21 +113,20 @@
                 day: 'numeric', 
             });
             var dateCorected = formattedDate + ", midnight"
-            console.log(dateCorected, "input")
-
             for (let i=0; i<occupied_dates.length; i++) {
-                console.log(occupied_dates[i], "1")
-                console.log(dateCorected, "2")
-                console.log(occupied_dates[i] == dateCorected)
-                console.log(occupied_tables[i])
                 if(occupied_dates[i] == dateCorected) {
-                    console.log("ok")
                     document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red'
-
-                }
+                    
                 
+                }
             }
         }
+
+        function inputDataWindow(){
+            console.log('table clicked')
+            let reservation_container = document.getElementById("reservation")
+                reservation_container.removeAttribute("hidden")
+            }
         
 
 
