@@ -18,8 +18,17 @@ class Reservation(models.Model):
         return f"Reservation for {self.name}"
 
 
+TABLES = ((0, "none"),
+          (1, "Table1"),
+          (2, "Table2"),
+          (3, "Table3"),
+          (4, "Table4"),
+          (5, "Table5"))
+
 class Date(models.Model):
     reservation_date = models.DateTimeField()
-    table = models.CharField(max_length=20, null=False, blank=False)
-
+    table = models.IntegerField(choices=TABLES, default=0)
+    checked = models.BooleanField(null=False, blank=False, default=False)
     
+    class Meta:
+        unique_together = [["reservation_date", "table"]]

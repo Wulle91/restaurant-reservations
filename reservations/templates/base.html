@@ -51,42 +51,12 @@
             </div>
         </div>
     </nav>
-    <form method="post" action="">
-        {% csrf_token %}
-        <div  id="date-container">
-            <label for="start">Resve your table:</label>
-
-            <input type="date" id="date" name="reservation_date"
-                value="new Date()"
-                min="new Date()" max="2030-12-31">
-        </div>
-        <div id="tables">
-            <label class="labl">
-                <input type="radio" name="Table" value="Table1"/>
-                <div>Table1</div>
-            </label>
-            <label class="labl">
-                <input type="radio" name="Table" value="Table2" />
-                <div>Table2</div>
-            </label>
-            <label class="labl">
-                <input type="radio" name="Table" value="Table3"/>
-                <div>Table3</div>
-            </label>
-            <label class="labl">
-                <input type="radio" name="Table" value="Table4" />
-                <div>Table4</div>
-            </label>
-            <label class="labl">
-                <input type="radio" name="Table" value="Table5"/>
-                <div>Table5</div>
-            </label>
-    
-        </div>
-        <div>
-            <button type="submit">Submit</button>
-        </div>
-    </form>
+    <main class="flex-shrink-0 main-bg">
+        
+        {% block content %}
+        <!-- Content Goes here -->
+        {% endblock content %}
+    </main>
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">
         <p class="m-0 text-center text-white">Made by Code Instituters</p>
@@ -95,8 +65,60 @@
             <i class="fab fa-instagram-square ms-3"></i>
             <i class="fab fa-youtube-square ms-3"></i></p>
     </footer>
-   
-    
+
+   <div id="dates"></div>
+
+
+    <script>
+        var occupied_dates = []
+        var occupied_tables = []
+        {% for date in dates %}
+            var date = "{{date.reservation_date}}"
+            var table = "{{date.table}}"
+            occupied_dates.push(date)
+            occupied_tables.push(table)
+        {% endfor %}
+
+
+        var text_div = document.getElementById('dates')
+        console.log(occupied_dates)
+        console.log(occupied_tables)
+       
+        
+        var date = document.getElementById('date').addEventListener("change", searchDates);
+        
+        function searchDates() {
+            for (let i=0; i<occupied_dates.length; i++) {
+                document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='lightblue'
+            }
+            let clickedDate = new Date(event.target.value); 
+            formattedDate = clickedDate.toLocaleDateString("en-US", { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+            });
+            var dateCorected = formattedDate + ", midnight"
+            console.log(dateCorected, "input")
+
+            for (let i=0; i<occupied_dates.length; i++) {
+                console.log(occupied_dates[i], "1")
+                console.log(dateCorected, "2")
+                console.log(occupied_dates[i] == dateCorected)
+                console.log(occupied_tables[i])
+                if(occupied_dates[i] == dateCorected) {
+                    console.log("ok")
+                    document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red'
+
+                }
+                
+            }
+        }
+        
+
+
+        
+    </script>
+
 </body>
 
 </html>
