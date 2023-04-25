@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('reservations', sho_dates, name='dates'),
     path('', comments, name='home'),
+    path('accounts/', include('allauth.urls')),
 ]
