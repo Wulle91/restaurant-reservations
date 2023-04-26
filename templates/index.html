@@ -67,7 +67,12 @@
 </form>
 
 
-
+{% if user.is_authenticated %}
+    
+    <div id="your_reservations">
+        <h2>Your reservations:</h2>
+    </div>
+{% endif %}
 
 
 {%endblock%}

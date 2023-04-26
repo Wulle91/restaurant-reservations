@@ -136,3 +136,13 @@
 .btn {
     background-color: aquamarine;
 }
+
+#your_reservations {
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+}
+
+#your_reservations h2{
+    margin-bottom: 50px;  
+}

@@ -102,21 +102,47 @@
             occupied_tables.push(table)
         {% endfor %}
         
-        var taables = []
+        var emails = []
       
         {% for reservation in reservations %}
-            console.log(book)
-            var tableeee = "{{reservation.name}}"
-            taables.push(tableeee)   
+            var email = "{{reservation.email}}"
+            emails.push(email)   
         {% endfor %}
-        
-      
+
+       
       
     
         console.log(occupied_dates)
         console.log(occupied_tables)
-        console.log(taables)
-       
+        console.log(emails)
+        console.log(emails.indexOf('{{user.email}}'))
+
+        function getAllIndexes(arr, val) {
+        var indexes = [], i = -1;
+        while ((i = arr.indexOf(val, i+1)) != -1){
+            indexes.push(i);
+            }
+        return indexes;
+        }
+        var indexes = getAllIndexes(emails, "{{user.email}}");
+        console.log(indexes)
+        let your_dates = []
+        let your_tables = []
+        for (let i=0; i<indexes.length; i++){
+            indexes[i]
+            your_dates.push(occupied_dates[indexes[i]])
+            your_tables.push(occupied_tables[indexes[i]])
+        }
+        console.log(your_dates)
+
+        let your_list_of_reservations = document.getElementById('your_reservations')
+        for (let i=0; i<your_dates.length; i++){
+            let list = document.createElement('li')
+            let list_item = document.createTextNode(`You have booked Table ${your_tables[i]} for ${your_dates[i].slice(0,-10)}`)
+            list.appendChild(list_item)
+            your_list_of_reservations.appendChild(list)
+        }
+        
         
         var date = document.getElementById('date').addEventListener("change", searchDates);
         var tables = document.getElementsByClassName('Table');

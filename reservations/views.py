@@ -8,7 +8,8 @@ def sho_dates(request):
     dates = Date.objects.all()
     reservations = Reservation.objects.all()
     context = {
-        'dates': dates
+        'dates': dates,
+        'reservations': reservations
     }
     if request.method == 'POST':
         reservation_date = request.POST.get('reservation_date')
@@ -17,7 +18,7 @@ def sho_dates(request):
         email = request.POST.get('email')    
         phone_number = request.POST.get('phone')  
         comment = request.POST.get('comment')  
-        Reservation.objects.get_or_create(name=name, email=email, phone_number=phone_number, comment=comment)
+        Reservation.objects.create(name=name, email=email, phone_number=phone_number, comment=comment)
         Date.objects.get_or_create(reservation_date=reservation_date, table=table, checked=True)
     return render(request, 'index.html', context)
 
