@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from .models import Date, Reservation
+from .models import Date, Reservation, Review
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -23,5 +24,20 @@ def sho_dates(request):
     return render(request, 'index.html', context)
 
 
+
+
 def comments(request):
-    return render(request, 'home.html')
+    comments = Review.objects.all()
+    comment_form = CommentForm(data=request.POST)
+    if comment_form.is_valid():
+        comment_form.instance.email = request.user.email
+        comment_form.instance.name = request.user.username
+        comment = comment_form.save(commit=False)
+        comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'home.html', {
+        "comments": comments,
+        "comment_form": CommentForm(),
+    },)
