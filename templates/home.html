@@ -35,15 +35,22 @@
                 </p>
                 <!-- The body of the comment goes before the | -->
                 {{ comment.body | linebreaks }}
+
+                {% if request.user.username == comment.name %}
+                    <a href="/delete/{{ comment.id }}">
+                        <button>Delete</button>
+                    </a>
+                {% endif %}
             </div>
+            
             <!-- Our for loop ends here -->
             {% endfor %}
         </div>
     </div>
+    
     <div class="col-md-4 card mb-4  mt-3 ">
         <div class="card-body">
             {% if user.is_authenticated %}
-
             <h3>Leave a comment:</h3>
             <p>Posting as: {{ user.username }}</p>
             <form method="post" style="margin-top: 1.3em;">

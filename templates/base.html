@@ -89,10 +89,9 @@
             <i class="fab fa-youtube-square ms-3"></i></p>
     </footer>
 
-   <div id="dat"></div>
-
 
     <script>
+
         var occupied_dates = [];
         var occupied_tables = [];
         {% for date in dates %}
@@ -109,9 +108,7 @@
             emails.push(email)   
         {% endfor %}
 
-       
       
-    
         console.log(occupied_dates)
         console.log(occupied_tables)
         console.log(emails)
@@ -125,9 +122,10 @@
             return indexes;
         }
         var indexes = getAllIndexes(emails, "{{user.email}}");
-        console.log(indexes)
+        console.log("indexes" + indexes)
         let your_dates = []
         let your_tables = []
+        console.log("here"+ your_dates)
         for (let i=0; i<indexes.length; i++){
 
             your_dates.push(occupied_dates[indexes[i]])

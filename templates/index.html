@@ -2,17 +2,17 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 <form method="post" action="">
     {% csrf_token %}
     
     <div  id="date-container">
         <label for="start">Resve your table:</label>
 
-        <input type="date" id="date" name="reservation_date"
-            value="new Date()"
-            min="new Date()" max="2030-12-31">
+        <input type="date" id="date" name="reservation_date"  min="{{ today }}"max="2030-12-31" required>
     </div>
-    
+   
     <div id="tables">
 
         <div id="image-container">
@@ -42,17 +42,17 @@
         <div>
             <label for="name">Enter your name:</label>
             <br>
-            <input id="name" name="name" type="text">
+            <input id="name" value="{{user}}" placeholder="{{user}}" name="name" type="text" required>
         </div>
         <div>
             <label for="email">Enter your email:</label>
             <br>
-            <input id="email" name="email" type="email">
+            <input id="email" name="email" value="{{user.email}}" placeholder="{{user.email}}" type="email" required>
         </div>
         <div>
             <label for="phone">Enter your phone:</label>
             <br>
-            <input id="phone" name="phone" type="number">
+            <input id="phone" name="phone" type="number" required>
         </div>
         <div>
             <label for="comment">Additional comment on your reservation:</label>
@@ -66,12 +66,18 @@
     
 </form>
 
-
 {% if user.is_authenticated %}
     
     <div id="your_reservations">
         <h2>Your reservations:</h2>
+        {% for reservation in reservations %}
+        <li>
+            {{reservation}}, on 
+        </li>
+            
+        {% endfor %}
     </div>
+    
 {% else %}
     <div id="your_reservations">
         <h2>To manage your reservations please register with same email you gave for reservation.</h2>
