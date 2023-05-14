@@ -175,11 +175,26 @@
                 reservation_container.removeAttribute("hidden")
             }
         
-
-
         
+        function edit(date_id){  
+            let edit_reservation = document.getElementById("edit_reservation")
+            let edit_form = document.getElementById("edit_form")
+            let reservation_id = parseInt(date_id) + 164
+            edit_reservation.removeAttribute("hidden")
+            edit_form.setAttribute("action", "/edit/" + date_id)
+            console.log(reservation_id)
+            {% for reservation in reservations %}
+                console.log({{reservation_id}})
+                if ({{reservation.id}} == reservation_id):
+                    console.log('ok')
+                    document.getElementById("phone").value = {{reservation.phone_number}};
+                    document.getElementById("comment").placeholder = {{reservation.comment}};
+                    {{ reservation.comment }}
+
+            {% endfor %}
+            
+
+        } 
     </script>
-
 </body>
-
 </html>

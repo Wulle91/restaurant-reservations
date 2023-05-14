@@ -63,19 +63,52 @@
             <button id="submit" type="submit">Submit</button>
         </div>
     </div>
-    
 </form>
 
-{% if user.is_authenticated %}
-    
+{% for reservation in reservations %}
+
+    {{reservation.id}}
+    {{reservation.name}}
+    {{reservation.comment}}
+    <br>
+{% endfor %}
+
+{% if user.is_authenticated %}   
     <div id="your_reservations">
-        <h2>Your reservations:</h2>
-        {% for reservation in reservations %}
-        <li>
-            {{reservation}}, on 
-        </li>
-            
-        {% endfor %}
+        <h2>Your reservations:</h2>   
+        {% for date in dates %}
+                {{date.id}}
+                {{ default_comment }}
+                <li id="reservation_list">
+                    <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
+                        <button id="edit" onclick="edit('{{ date.id }}')" type="edit">Edit</button>
+                        <a href="/delete/{{ date.id }}">
+                            <button>Delete</button>
+                        </a>
+                    </p> 
+                    <form method="POST" id="edit_form" >
+                        {% csrf_token %}
+
+                        <div id="edit_reservation" hidden>
+                            <div>
+                                <label for="phone">Change your phone:</label>
+                                <br>
+                                <input id="phone" name="new_phone_number" value="{{ default_phone_number }}" type="number" required>
+                            </div>
+                            <div>
+                                <label for="comment">Edit additional comment on your reservation:</label>
+                                <br>
+                                <textarea name="comment" name="new_comment" id="comment" rows="5"></textarea>
+                            </div>
+                            <a href="/edit/{{ date.id }}">
+                                <button type="submit">Edit</button>
+                            </a>
+                            
+                        </div>
+                    </form>      
+                </li>  
+                
+        {% endfor %} 
     </div>
     
 {% else %}

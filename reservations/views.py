@@ -19,7 +19,6 @@ def sho_dates(request):
         'today': today,
     }
     if request.method == 'POST':
-
         reservation_date = request.POST.get('reservation_date')
         table = request.POST.get('Table')    
         name = request.POST.get('name')
@@ -57,15 +56,29 @@ def delete_comment(request, comment_id):
     comment = get_object_or_404(Review, id=comment_id)
     comment.delete()
     return redirect('home')
-    
-def edit_comment(request, comment_id):
-    comment = get_object_or_404(comment, id=comment_id)
+
+def delete_reservation(request, date_id):
+    reservation_id = int(date_id) + 164
+    reservation = get_object_or_404(Reservation, id=reservation_id)
+    date = get_object_or_404(Date, id=date_id)
+    reservation.delete()
+    date.delete()
+    return redirect('home')
+
+
+def edit_reservation(request, date_id):
+    reservation_id = int(date_id) + 164
+    reservation = get_object_or_404(Reservation, id=reservation_id)
     if request.method == 'POST':
-        form = CommentForm(request.POST, instance=comment)
-        if form.is_valid():
-            form.save()
-    form = CommentForm(instance=comment)
-    context = {
-        'form': form
-    }
-    return render(request, 'home.html', context)
+        reservation.phone_number = request.POST.get('new_phone_number')  
+        reservation.comment = request.POST.get('comment')  
+        reservation.save()
+
+        # redirect to success page or somewhere else
+        return redirect('home')
+
+    context = {'reservation': reservation,
+               'default_phone_number': reservation.phone_number,
+               'default_comment': reservation.comment,
+               }
+    return render(request, 'index.html', context)
