@@ -88,17 +88,17 @@
                     </p> 
                     <form method="POST" id="edit_form" >
                         {% csrf_token %}
-
+                        {{reservations.241}}
                         <div id="edit_reservation" hidden>
                             <div>
-                                <label for="phone">Change your phone:</label>
+                                <label for="new_phone">Change your phone:</label>
                                 <br>
-                                <input id="phone" name="new_phone_number" value="{{ default_phone_number }}" type="number" required>
+                                <input id="new_phone" name="new_phone_number" value="{{ default_phone_number }}" type="number" required>
                             </div>
                             <div>
-                                <label for="comment">Edit additional comment on your reservation:</label>
+                                <label for="new_comment">Edit additional comment on your reservation:</label>
                                 <br>
-                                <textarea name="comment" name="new_comment" id="comment" rows="5"></textarea>
+                                <textarea name="new_comment" name="new_comment" placeholder="{{reservation.id}}" id="new_comment" rows="5"></textarea>
                             </div>
                             <a href="/edit/{{ date.id }}">
                                 <button type="submit">Edit</button>

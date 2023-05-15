@@ -71,7 +71,7 @@ def edit_reservation(request, date_id):
     reservation = get_object_or_404(Reservation, id=reservation_id)
     if request.method == 'POST':
         reservation.phone_number = request.POST.get('new_phone_number')  
-        reservation.comment = request.POST.get('comment')  
+        reservation.comment = request.POST.get('new_comment')  
         reservation.save()
 
         # redirect to success page or somewhere else
@@ -80,5 +80,6 @@ def edit_reservation(request, date_id):
     context = {'reservation': reservation,
                'default_phone_number': reservation.phone_number,
                'default_comment': reservation.comment,
+               'reservation_id': reservation_id,
                }
     return render(request, 'index.html', context)

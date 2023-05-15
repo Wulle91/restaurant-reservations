@@ -181,19 +181,17 @@
             let edit_form = document.getElementById("edit_form")
             let reservation_id = parseInt(date_id) + 164
             edit_reservation.removeAttribute("hidden")
+            document.getElementById("new_comment").setAttribute("placeholder", reservation_id);
+            document.getElementById("new_phone").setAttribute("placeholder", reservation_id);
             edit_form.setAttribute("action", "/edit/" + date_id)
-            console.log(reservation_id)
-            {% for reservation in reservations %}
-                console.log({{reservation_id}})
-                if ({{reservation.id}} == reservation_id):
-                    console.log('ok')
-                    document.getElementById("phone").value = {{reservation.phone_number}};
-                    document.getElementById("comment").placeholder = {{reservation.comment}};
-                    {{ reservation.comment }}
-
-            {% endfor %}
+            let comment_id = document.getElementById("new_comment").getAttribute("placeholder");
             
-
+            {% for reservation in reservations %}
+                if ({{reservation.id}} == comment_id) {
+                    document.getElementById("new_phone").placeholder = `{{reservation.phone_number}}`;
+                    document.getElementById("new_comment").placeholder = `{{reservation.comment}}`;
+                }
+            {% endfor %}
         } 
     </script>
 </body>
