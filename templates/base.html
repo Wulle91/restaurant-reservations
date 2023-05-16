@@ -193,6 +193,33 @@
                 }
             {% endfor %}
         } 
+
+        function close_edit_container() {
+            document.getElementById("edit_reservation").setAttribute('hidden', 'true');
+        }
+
+        function confirm_comment_delete(x) {
+            document.getElementById("delete_comment" + x).removeAttribute('hidden');
+            document.getElementById("delete_comment_button" + x).setAttribute('hidden', 'true');
+        }
+
+        function close_delete_comment(x) {
+            document.getElementById("delete_comment" + x).setAttribute('hidden', 'true');
+            document.getElementById("delete_comment_button" + x).removeAttribute('hidden');
+        }
+
+        function open_delete_window(x) {
+            document.getElementById("delete_date" + x).removeAttribute('hidden');
+            document.getElementById("delete_comment_btn" + x).setAttribute('hidden', 'true');
+            document.getElementById("edit" + x).setAttribute('hidden', 'true');
+        }
+
+        function close_delete_window(x) {
+            document.getElementById("delete_date" + x).setAttribute('hidden', 'true');
+            document.getElementById("delete_comment_btn" + x).removeAttribute('hidden');
+            document.getElementById("edit" + x).removeAttribute('hidden');
+        }
+
     </script>
 </body>
 </html>

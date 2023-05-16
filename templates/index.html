@@ -81,28 +81,39 @@
                 {{ default_comment }}
                 <li id="reservation_list">
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
-                        <button id="edit" onclick="edit('{{ date.id }}')" type="edit">Edit</button>
-                        <a href="/delete/{{ date.id }}">
-                            <button>Delete</button>
-                        </a>
+                        <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')" type="edit">Edit</button>
+                        <button id="delete_comment_btn{{ date.id }}" onclick="open_delete_window('{{ date.id }}')">Delete</button>
+                        <div id="delete_date{{ date.id }}" hidden>
+                            <p>Are you shure?</p>
+                            <a href="/delete/{{ date.id }}">
+                                <button>Delete</button>
+                            </a>
+                            <button onclick="close_delete_window('{{ date.id }}')">No</button>
+                        </div>                      
                     </p> 
                     <form method="POST" id="edit_form" >
                         {% csrf_token %}
-                        {{reservations.241}}
                         <div id="edit_reservation" hidden>
+                            
                             <div>
                                 <label for="new_phone">Change your phone:</label>
                                 <br>
-                                <input id="new_phone" name="new_phone_number" value="{{ default_phone_number }}" type="number" required>
+                                <input id="new_phone" name="new_phone_number" type="number">
                             </div>
                             <div>
                                 <label for="new_comment">Edit additional comment on your reservation:</label>
                                 <br>
-                                <textarea name="new_comment" name="new_comment" placeholder="{{reservation.id}}" id="new_comment" rows="5"></textarea>
+                                <textarea name="new_comment" name="new_comment" id="new_comment" rows="5"></textarea>
                             </div>
-                            <a href="/edit/{{ date.id }}">
-                                <button type="submit">Edit</button>
-                            </a>
+                            <div id="buttons">
+                                <a href="/edit/{{ date.id }}">
+                                    <button type="submit">Edit</button>
+                                </a>
+                                <div id="close_button">
+                                    <button type="button" onclick="close_edit_container()">Cancel</button>
+                                </div>
+                                
+                            </div>
                             
                         </div>
                     </form>      

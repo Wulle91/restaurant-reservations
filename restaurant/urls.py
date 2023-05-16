@@ -18,12 +18,11 @@ from django.urls import path, include
 from reservations.views import sho_dates, comments, delete_comment, edit_reservation, delete_reservation
 
 urlpatterns = [
+    path('delete/<date_id>', delete_reservation, name='delete'),
+    path('delete/<comment_id>', delete_comment, name='delete'),
     path('admin/', admin.site.urls),
-    path('reservations', sho_dates, name='dates'),
     path('edit/<date_id>', edit_reservation, name='edit'),
     path('', comments, name='home'),
-    path('delete/<date_id>', delete_reservation, name='delete'),
     path('accounts/', include('allauth.urls')),
-    path('delete/<comment_id>', delete_comment, name='delete'),
-
+    path('reservations', sho_dates, name='dates'),
 ]
