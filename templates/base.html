@@ -108,10 +108,13 @@
             emails.push(email)   
         {% endfor %}
 
-      
+        let liElements = document.getElementsByClassName('your_booked-dates');
+
+ 
         console.log(occupied_dates)
         console.log(occupied_tables)
         console.log(emails)
+        console.log(emails[2])
         console.log(emails.indexOf('{{user.email}}'))
 
         function getAllIndexes(arr, val) {
@@ -122,32 +125,24 @@
             return indexes;
         }
         var indexes = getAllIndexes(emails, "{{user.email}}");
-        console.log("indexes" + indexes)
-        let your_dates = []
-        let your_tables = []
-        console.log("here"+ your_dates)
+  
         for (let i=0; i<indexes.length; i++){
+            liElements[indexes[i]].removeAttribute('hidden')
 
-            your_dates.push(occupied_dates[indexes[i]])
-            your_tables.push(occupied_tables[indexes[i]])
         }
-        console.log(your_dates)
 
-        let your_list_of_reservations = document.getElementById('your_reservations')
-        for (let i=0; i<your_dates.length; i++){
-            let list = document.createElement('li')
-            let list_item = document.createTextNode(`You have booked Table ${your_tables[i]} for ${your_dates[i]}`)
-            list.appendChild(list_item)
-            your_list_of_reservations.appendChild(list)
-            
-            
-        }
         
-        
-        var date = document.getElementById('date').addEventListener("change", searchDates);
+        var date = document.getElementById('date')
+        console.log('ghg'+date.value)
+        date.addEventListener("change",() =>{
+            searchDates();
+            show_input_data();
+        });
         var tables = document.getElementsByClassName('Table');
-        for (var i = 0; i < tables.length; i++) {
-            tables[i].addEventListener("click", inputDataWindow);
+        function show_input_data() {
+            for (var i = 0; i < tables.length; i++) {
+                    tables[i].addEventListener("click", inputDataWindow);
+            }
         }
         
         function searchDates() {
@@ -164,8 +159,6 @@
             for (let i=0; i<occupied_dates.length; i++) {
                 if(occupied_dates[i] == dateCorected) {
                     document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red'
-
-                
                 }
             }
         }

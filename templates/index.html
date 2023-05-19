@@ -10,7 +10,7 @@
     <div  id="date-container">
         <label for="start">Resve your table:</label>
 
-        <input type="date" id="date" name="reservation_date"  min="{{ today }}"max="2030-12-31" required>
+        <input type="date" id="date" name="reservation_date" min="{{ today }}"max="2030-12-31" required>
     </div>
    
     <div id="tables">
@@ -77,9 +77,8 @@
     <div id="your_reservations">
         <h2>Your reservations:</h2>   
         {% for date in dates %}
-                {{date.id}}
-                {{ default_comment }}
-                <li id="reservation_list">
+
+                <li id="reservation_list" class="your_booked-dates" hidden>
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
                         <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')" type="edit">Edit</button>
                         <button id="delete_comment_btn{{ date.id }}" onclick="open_delete_window('{{ date.id }}')">Delete</button>

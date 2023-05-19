@@ -37,7 +37,7 @@
                 {{ comment.body | linebreaks }}
 
                 {% if request.user.username == comment.name %}
-                    <button id="delete_comment_button{{comment.id}}" onclick="confirm_comment_delete('{{comment.id}}')">Open Confirmation</button>
+                    <button id="delete_comment_button{{comment.id}}" onclick="confirm_comment_delete('{{comment.id}}')">Delete Comment</button>
                     <div id="delete_comment{{comment.id}}" hidden>
                         <p>Delete your comment?</p>
                         <a href="/delete/{{ comment.id }}">
