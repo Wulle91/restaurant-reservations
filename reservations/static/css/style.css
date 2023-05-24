@@ -61,7 +61,6 @@
 
 #image-container {
     width: 638px;
-    background-color: aqua;
     background-image: url('https://res.cloudinary.com/dzwpkjbhq/image/upload/v1682368129/static/summernote/Coffee-Shop-Layout-3D_pbdlsm.jpg');
     background-repeat: no-repeat;
     height: 489px;
@@ -184,4 +183,39 @@
 
 .comments {
     display: block;
+}
+
+
+@media (max-width: 650px) {
+    #image-container {
+        height: 0;
+        background-image: none;
+    }
+    #tables {
+        
+        text-align: center;
+    }
+    .Table {
+        background-color: rgb(161, 208, 219);
+        width: 70px;
+        height: 80%;
+        border-radius: 6px;
+        margin-left: 0;
+        margin-top: 0;
+        margin-right: 0;  
+        margin-bottom: 0;
+        font-size: 20px;
+        padding-top: 10px;
+    }
+    #Table4{
+        position: relative;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    
+    #Table5{
+        position: relative;
+        margin-left: 0;
+        margin-top: 0;
+    }
 }
