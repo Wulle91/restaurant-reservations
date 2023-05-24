@@ -82,7 +82,7 @@
 }
 
 .Table {
-    background-color: rgba(61, 197, 84, 0.6);
+    background-color: white;
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -92,6 +92,10 @@
     margin-bottom: 0px;
     font-size: 20px;
     padding-top: 10px;
+}
+
+.Table:hover {
+    border-color: red;
 }
 
 #Table4{

@@ -56,7 +56,7 @@
 
                 </ul>
                 <span class="navbar-text text-muted">
-                    adventures of a software developer
+                    bst burger in ton
                 </span>
             </div>
         </div>
@@ -109,14 +109,9 @@
         {% endfor %}
 
         let liElements = document.getElementsByClassName('your_booked-dates');
-
+        var indexes = getAllIndexes(emails, "{{user.email}}");
+        var tables = document.getElementsByClassName('Table');
  
-        console.log(occupied_dates)
-        console.log(occupied_tables)
-        console.log(emails)
-        console.log(emails[2])
-        console.log(emails.indexOf('{{user.email}}'))
-
         function getAllIndexes(arr, val) {
             var indexes = [], i = -1;
             while ((i = arr.indexOf(val, i+1)) != -1){
@@ -124,30 +119,27 @@
                 }
             return indexes;
         }
-        var indexes = getAllIndexes(emails, "{{user.email}}");
-  
+
         for (let i=0; i<indexes.length; i++){
             liElements[indexes[i]].removeAttribute('hidden')
-
         }
 
-        
         var date = document.getElementById('date')
-        console.log('ghg'+date.value)
         date.addEventListener("change",() =>{
-            searchDates();
-            show_input_data();
+            addOnclick();
+            searchDates();    
         });
-        var tables = document.getElementsByClassName('Table');
-        function show_input_data() {
-            for (var i = 0; i < tables.length; i++) {
-                    tables[i].addEventListener("click", inputDataWindow);
+
+        function addOnclick() {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById("Table" + i).onclick = inputDataWindow;
             }
         }
-        
+       
         function searchDates() {
             for (let i=0; i<occupied_dates.length; i++) {
                 document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='white'
+                document.getElementById("Table"+occupied_tables[i]).setAttribute('onclick', 'inputDataWindow()');
             }
             let clickedDate = new Date(event.target.value); 
             formattedDate = clickedDate.toLocaleDateString("en-US", { 
@@ -158,7 +150,8 @@
             var dateCorected = formattedDate
             for (let i=0; i<occupied_dates.length; i++) {
                 if(occupied_dates[i] == dateCorected) {
-                    document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red'
+                    document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red';
+                    document.getElementById("Table"+occupied_tables[i]).removeAttribute('onclick');
                 }
             }
         }
@@ -172,7 +165,7 @@
         function edit(date_id){  
             let edit_reservation = document.getElementById("edit_reservation")
             let edit_form = document.getElementById("edit_form")
-            let reservation_id = parseInt(date_id) + 164
+            let reservation_id = parseInt(date_id) + 165
             edit_reservation.removeAttribute("hidden")
             document.getElementById("new_comment").setAttribute("placeholder", reservation_id);
             document.getElementById("new_phone").setAttribute("placeholder", reservation_id);
@@ -211,6 +204,10 @@
             document.getElementById("delete_date" + x).setAttribute('hidden', 'true');
             document.getElementById("delete_comment_btn" + x).removeAttribute('hidden');
             document.getElementById("edit" + x).removeAttribute('hidden');
+        }
+
+        function close_reservation_window() {
+            document.getElementById("reservation").setAttribute('hidden', 'true');
         }
 
     </script>

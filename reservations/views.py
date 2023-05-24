@@ -58,7 +58,7 @@ def delete_comment(request, comment_id):
     return redirect('home')
 
 def delete_reservation(request, date_id):
-    reservation_id = int(date_id) + 164
+    reservation_id = int(date_id) + 165
     reservation = get_object_or_404(Reservation, id=reservation_id)
     date = get_object_or_404(Date, id=date_id)
     reservation.delete()
@@ -67,7 +67,7 @@ def delete_reservation(request, date_id):
 
 
 def edit_reservation(request, date_id):
-    reservation_id = int(date_id) + 164
+    reservation_id = int(date_id) + 165
     reservation = get_object_or_404(Reservation, id=reservation_id)
     if request.method == 'POST':
         reservation.phone_number = request.POST.get('new_phone_number')  

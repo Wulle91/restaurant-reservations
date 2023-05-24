@@ -40,7 +40,7 @@
                     <button id="delete_comment_button{{comment.id}}" onclick="confirm_comment_delete('{{comment.id}}')">Delete Comment</button>
                     <div id="delete_comment{{comment.id}}" hidden>
                         <p>Delete your comment?</p>
-                        <a href="/delete/{{ comment.id }}">
+                        <a href="/delete_comment/{{ comment.id }}">
                             <button>Delete</button>
                         </a>
                         <button onclick="close_delete_comment('{{comment.id}}')">No</button>

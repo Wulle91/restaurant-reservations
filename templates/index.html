@@ -17,23 +17,23 @@
 
         <div id="image-container">
             <label class="labl">
-                <input type="radio" name="Table" value="1"/>
+                <input type="radio" id="table1" name="Table" value="1"/>
                 <div class="Table" id="Table1">Table 1</div>
             </label>
             <label class="labl">
-                <input type="radio" name="Table" value="2" />
+                <input type="radio" id="table2" name="Table" value="2" />
                 <div class="Table" id="Table2">Table 2</div>
             </label>
             <label class="labl">
-                <input type="radio" name="Table" value="3"/>
+                <input type="radio" id="table3" name="Table" value="3"/>
                 <div class="Table" id="Table3">Table 3</div>
             </label>
             <label class="labl">
-                <input type="radio" name="Table" value="4" />
+                <input type="radio" id="table4" name="Table" value="4" />
                 <div class="Table" id="Table4">Table 4</div>
             </label>
             <label class="labl">
-                <input type="radio" name="Table" value="5"/>
+                <input type="radio" id="table5" name="Table" value="5"/>
                 <div class="Table" id="Table5">Table 5</div>
             </label>
         </div>
@@ -61,23 +61,16 @@
         </div>
         <div id="submitButton">
             <button id="submit" type="submit">Submit</button>
+            <button onclick="close_reservation_window()">Cancel</button>
         </div>
     </div>
 </form>
 
-{% for reservation in reservations %}
-
-    {{reservation.id}}
-    {{reservation.name}}
-    {{reservation.comment}}
-    <br>
-{% endfor %}
 
 {% if user.is_authenticated %}   
     <div id="your_reservations">
         <h2>Your reservations:</h2>   
         {% for date in dates %}
-
                 <li id="reservation_list" class="your_booked-dates" hidden>
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
                         <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')" type="edit">Edit</button>
