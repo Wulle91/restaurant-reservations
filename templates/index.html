@@ -8,13 +8,13 @@
     {% csrf_token %}
     
     <div  id="date-container">
-        <label for="start">Resve your table:</label>
+        <h2>To Book a Table first chose a date and than a table.</h2>
+        <label for="start">Chose your date:</label>
 
         <input type="date" id="date" name="reservation_date" min="{{ today }}"max="2030-12-31" required>
     </div>
    
     <div id="tables">
-
         <div id="image-container">
             <label class="labl">
                 <input type="radio" id="table1" name="Table" value="1"/>
