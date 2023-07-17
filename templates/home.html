@@ -6,7 +6,7 @@
 
 {% if user.is_authenticated %}
 <div id="title">
-    <h1>{{ user }}, Welcome to home of Burger</h1>
+    <h1>{{ user|capfirst }}, Welcome to home of Burger</h1>
 
 {% else %}
     <h1>Welcome to home of Burger</h1>
@@ -27,7 +27,7 @@
             <div class="comments" style="padding: 10px;">
                 <p class="font-weight-bold">
                     <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
-                    {{ comment.name }}
+                    {{ comment.name|capfirst }}
                     <span class=" text-muted font-weight-normal">
                         <!-- The comment's created date goes here -->
                         {{ comment.created_on }}

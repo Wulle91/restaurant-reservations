@@ -25,7 +25,7 @@
     flex-direction: column;
     row-gap: 30px
 }
-#edit_reservation {
+.edit_reservation {
     width: 600px;
     height: 350px;
     background-color: rgba(61, 70, 197, 0.7);

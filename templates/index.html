@@ -17,23 +17,23 @@
     <div id="tables">
         <div id="image-container">
             <label class="labl">
-                <input type="radio" id="table1" name="Table" value="1"/>
+                <input type="radio" id="table1" name="Table" value="1" onclick="alert(`Please select a date first.`)"/>
                 <div class="Table" id="Table1">Table 1</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table2" name="Table" value="2" />
+                <input type="radio" id="table2" name="Table" value="2" onclick="alert(`Please select a date first.`)"/>
                 <div class="Table" id="Table2">Table 2</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table3" name="Table" value="3"/>
+                <input type="radio" id="table3" name="Table" value="3" onclick="alert(`Please select a date first.`)"/>
                 <div class="Table" id="Table3">Table 3</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table4" name="Table" value="4" />
+                <input type="radio" id="table4" name="Table" value="4" onclick="alert(`Please select a date first.`)"/>
                 <div class="Table" id="Table4">Table 4</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table5" name="Table" value="5"/>
+                <input type="radio" id="table5" name="Table" value="5" onclick="alert(`Please select a date first.`)"/>
                 <div class="Table" id="Table5">Table 5</div>
             </label>
         </div>
@@ -73,7 +73,7 @@
         {% for date in dates %}
                 <li id="reservation_list" class="your_booked-dates" hidden>
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
-                        <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')" type="edit">Edit</button>
+                        <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')">Edit</button>
                         <button id="delete_comment_btn{{ date.id }}" onclick="open_delete_window('{{ date.id }}')">Delete</button>
                         <div id="delete_date{{ date.id }}" hidden>
                             <p>Are you shure?</p>
@@ -83,26 +83,26 @@
                             <button onclick="close_delete_window('{{ date.id }}')">No</button>
                         </div>                      
                     </p> 
-                    <form method="POST" id="edit_form" >
+                    <form method="POST" id="edit_form{{ date.id }}" action="/edit/{{ date.id }}">
                         {% csrf_token %}
-                        <div id="edit_reservation" hidden>
+                        <div id="edit_reservation{{ date.id }}" class="edit_reservation" hidden>
                             
                             <div>
                                 <label for="new_phone">Change your phone:</label>
                                 <br>
-                                <input id="new_phone" name="new_phone_number" type="number">
+                                <input id="new_phone{{ date.id }}" name="new_phone_number" type="number">
                             </div>
                             <div>
                                 <label for="new_comment">Edit additional comment on your reservation:</label>
                                 <br>
-                                <textarea name="new_comment" name="new_comment" id="new_comment" rows="5"></textarea>
+                                <textarea name="new_comment" id="new_comment{{ date.id }}" rows="5"></textarea>
                             </div>
                             <div id="buttons">
-                                <a href="/edit/{{ date.id }}">
-                                    <button type="submit">Edit</button>
-                                </a>
+                                
+                                <button type="submit">Edit</button>
+                                
                                 <div id="close_button">
-                                    <button type="button" onclick="close_edit_container()">Cancel</button>
+                                    <button type="button" onclick="close_edit_container('{{ date.id }}')">Cancel</button>
                                 </div>
                                 
                             </div>

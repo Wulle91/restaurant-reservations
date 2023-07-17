@@ -42,7 +42,9 @@ def comments(request):
         comment_form.instance.email = request.user.email
         comment_form.instance.name = request.user.username
         comment = comment_form.save(commit=False)
+        messages.success(request, 'Thank you for leaving comment on our page!')
         comment.save()
+        return redirect('home')
     else:
         comment_form = CommentForm()
 
@@ -74,7 +76,7 @@ def edit_reservation(request, date_id):
         reservation.comment = request.POST.get('new_comment')  
         reservation.save()
 
-        # redirect to success page or somewhere else
+        messages.success(request, 'Your reservation has been successfully updated!')
         return redirect('home')
 
     context = {'reservation': reservation,

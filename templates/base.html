@@ -17,6 +17,7 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="script" href="{% static 'js/scripts.js' %}">
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
@@ -102,7 +103,7 @@
         {% endfor %}
         
         var emails = []
-      
+    
         {% for reservation in reservations %}
             var email = "{{reservation.email}}"
             emails.push(email)   
@@ -126,8 +127,11 @@
 
         var date = document.getElementById('date')
         date.addEventListener("change",() =>{
+            for (let i=0; i<occupied_dates.length; i++) {
+            document.getElementById("table"+occupied_tables[i]).removeAttribute('onclick');
+            };
             addOnclick();
-            searchDates();    
+            searchDates();
         });
 
         function addOnclick() {
@@ -163,25 +167,21 @@
         
         
         function edit(date_id){  
-            let edit_reservation = document.getElementById("edit_reservation")
+            document.getElementById("edit_reservation" + date_id).removeAttribute("hidden")
             let edit_form = document.getElementById("edit_form")
             let reservation_id = parseInt(date_id) + 165
-            edit_reservation.removeAttribute("hidden")
-            document.getElementById("new_comment").setAttribute("placeholder", reservation_id);
-            document.getElementById("new_phone").setAttribute("placeholder", reservation_id);
-            edit_form.setAttribute("action", "/edit/" + date_id)
-            let comment_id = document.getElementById("new_comment").getAttribute("placeholder");
             
             {% for reservation in reservations %}
-                if ({{reservation.id}} == comment_id) {
-                    document.getElementById("new_phone").placeholder = `{{reservation.phone_number}}`;
-                    document.getElementById("new_comment").placeholder = `{{reservation.comment}}`;
+                if ({{reservation.id}} == reservation_id) {
+                    document.getElementById("new_phone" + date_id).setAttribute("placeholder", `{{reservation.phone_number}}`);
+                    document.getElementById("new_comment" + date_id).setAttribute("placeholder", `{{reservation.comment}}`);
+
                 }
             {% endfor %}
         } 
 
-        function close_edit_container() {
-            document.getElementById("edit_reservation").setAttribute('hidden', 'true');
+        function close_edit_container(date_id) {
+            document.getElementById("edit_reservation" + date_id).setAttribute('hidden', 'true');
         }
 
         function confirm_comment_delete(x) {
@@ -210,6 +210,7 @@
             document.getElementById("reservation").setAttribute('hidden', 'true');
         }
 
+        
     </script>
 </body>
 </html>
