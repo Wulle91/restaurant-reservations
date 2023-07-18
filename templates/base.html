@@ -107,14 +107,6 @@
                 "message": contactForm.date.value,
                 "table_nr": contactForm.Table.value,
             })
-            .then(
-        function(response) {
-            console.log("SUCCESS", response);
-        },
-        function(error) {
-            console.log("FAILED", error);
-        }
-    );
         }
 
         var occupied_dates = [];
@@ -211,6 +203,13 @@
         
         function edit(date_id) {
             if (document.getElementById("reservation").hidden) {
+                let editReservations = document.getElementsByClassName("edit_reservation");
+                for (let i = 0; i < editReservations.length; i++) {
+                    if (!editReservations[i].hidden) {
+                        return;
+                    }
+                }
+
                 document.getElementById("edit_reservation" + date_id).removeAttribute("hidden");
                 let edit_form = document.getElementById("edit_form" + date_id);
                 let reservation_id = parseInt(date_id) + 165;
@@ -218,16 +217,17 @@
                 let commentPlaceholder = "";
 
                 {% for reservation in reservations %}
-                    if ({{reservation.id}} === reservation_id) {
-                        phonePlaceholder = "{{reservation.phone_number}}";
-                        commentPlaceholder = "{{reservation.comment}}";
-                    }
+                if ({{reservation.id}} === reservation_id) {
+                    phonePlaceholder = "{{reservation.phone_number}}";
+                    commentPlaceholder = "{{reservation.comment}}";
+                }
                 {% endfor %}
 
                 document.getElementById("new_phone" + date_id).setAttribute("placeholder", phonePlaceholder);
                 document.getElementById("new_comment" + date_id).setAttribute("placeholder", commentPlaceholder);
             }
         }
+
 
         function close_edit_container(date_id) {
             document.getElementById("edit_reservation" + date_id).setAttribute('hidden', 'true');

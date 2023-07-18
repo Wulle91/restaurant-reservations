@@ -14,6 +14,10 @@ body {
     text-align: center;
 }
 
+#wellcome_message {
+    margin-bottom: 70px;
+}
+
 #main-index {
     width: 638px;
     height: 100%;
@@ -197,6 +201,11 @@ body {
     height: 300px;
     padding-top: 100px;
     text-align: center;
+    color: wheat;
+}
+
+#logout-title{
+    margin-top: 100px;
     color: wheat;
 }
 
