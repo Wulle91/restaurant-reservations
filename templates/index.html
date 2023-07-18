@@ -4,7 +4,7 @@
 
 {% load crispy_forms_tags %}
 <div id="main-index" class="d-flex flex-column h-100 main-bg">
-<form method="post" action="">
+<form method="post" action="" onsubmit="return sendMail(this)">
     {% csrf_token %}
     
     <div  id="date-container">

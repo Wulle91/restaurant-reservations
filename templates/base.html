@@ -18,6 +18,14 @@
     </script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="script" href="{% static 'js/scripts.js' %}">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init("kjQbucoAksayHpm_y");
+    })();
+    </script>
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
@@ -90,8 +98,24 @@
             <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube-square ms-3"></i></p></a>         
     </footer>
 
-
     <script>
+
+        function sendMail(contactForm) {
+            emailjs.send("service_gcql1ag","template_plus06x", {
+                "from_name": contactForm.name.value,
+                "from_email": contactForm.email.value,
+                "message": contactForm.date.value,
+                "table_nr": contactForm.Table.value,
+            })
+            .then(
+        function(response) {
+            console.log("SUCCESS", response);
+        },
+        function(error) {
+            console.log("FAILED", error);
+        }
+    );
+        }
 
         var occupied_dates = [];
         var occupied_tables = [];
