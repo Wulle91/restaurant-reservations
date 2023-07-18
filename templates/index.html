@@ -3,24 +3,22 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
-
+<div id="main-index" class="d-flex flex-column h-100 main-bg">
 <form method="post" action="">
     {% csrf_token %}
     
     <div  id="date-container">
-        <h2>To Book a Table first chose a date and than a table.</h2>
-        <label for="start">Chose your date:</label>
+        <h2>To book a table, first choose a date and then a table.</h2>
+        <label for="start">Choose your date:</label>
         <input type="date" id="date" name="reservation_date" min="{{ today }}"max="2030-12-31" required>
-    </div>
-    
-            <div class="col-md-8 offset-md-2 msg-cont">
-                <div class="alert {{message.tags}} alert-dismissible fade show" id="msg2" role="alert">
-                </div>
+        <div class="col-md-8 offset-md-2 msg-cont">
+            <div class="alert {{message.tags}} alert-dismissible fade show" id="msg2" role="alert">
             </div>
-
-   
+            <div class="alert {{message.tags}} alert-dismissible fade show" id="msg3" role="alert">
+            </div>
+        </div>
+    </div>
     <div id="tables">
-   
         <div id="image-container">
             <label class="labl">
                 <input type="radio" id="table1" name="Table" value="1" onclick="message()"/>
@@ -66,8 +64,8 @@
             <textarea name="comment" name="comment" id="" rows="5"></textarea>
         </div>
         <div id="submitButton">
-            <button id="submit" type="submit">Submit</button>
-            <button onclick="close_reservation_window()">Cancel</button>
+            <button class="btn" id="submit" type="submit">Submit</button>
+            <button class="btn cancel" onclick="close_reservation_window()">Cancel</button>
         </div>
     </div>
 </form>
@@ -80,14 +78,14 @@
                 <li id="reservation_list" class="your_booked-dates" hidden>
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
                         <br>
-                        <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')">Edit</button>
-                        <button id="delete_comment_btn{{ date.id }}" onclick="open_delete_window('{{ date.id }}')">Delete</button>
+                        <button class="btn accept" id="edit{{ date.id }}" onclick="edit('{{ date.id }}')">Edit</button>
+                        <button class="btn delete" id="delete_comment_btn{{ date.id }}" onclick="open_delete_window('{{ date.id }}')">Delete</button>
                         <div id="delete_date{{ date.id }}" hidden>
                             <p>Are you shure?</p>
                             <a href="/delete/{{ date.id }}">
-                                <button>Delete</button>
+                                <button class="btn delete">Delete</button>
                             </a>
-                            <button onclick="close_delete_window('{{ date.id }}')">No</button>
+                            <button class="btn accept" onclick="close_delete_window('{{ date.id }}')">No</button>
                         </div>                      
                     </p> 
                     <form method="POST" id="edit_form{{ date.id }}" action="/edit/{{ date.id }}">
@@ -105,8 +103,8 @@
                                 <textarea name="new_comment" id="new_comment{{ date.id }}" rows="5"></textarea>
                             </div>
                             <div id="buttons">
-                                <button type="submit">Edit</button>
-                                <button type="button" onclick="close_edit_container('{{ date.id }}')">Cancel</button>
+                                <button class="btn" type="submit">Edit</button>
+                                <button class="btn" type="button" onclick="close_edit_container('{{ date.id }}')">Cancel</button>
                             </div>
                         </div>
                     </form>      
@@ -120,5 +118,5 @@
     </div>
 {% endif %}
 
-
+</div>
 {%endblock%}

@@ -5,7 +5,7 @@
 
 <head>
     <title>Burger Bar</title>
-
+    <link rel="icon" href="https://res.cloudinary.com/dzwpkjbhq/image/upload/v1689693601/static/summernote/smallburger_juxviw.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    <main class="flex-shrink-0 main-bg">
+    <main class="flex-shrink-0 main-bg main">
         
         {% block content %}
         <!-- Content Goes here -->
@@ -83,11 +83,11 @@
   
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">
-        <p class="m-0 text-center text-white">Made by Code Instituters</p>
-        <p class="m-0 text-center text-white">Follow us: <i class="fab fa-facebook-square ms-3"></i>
-            <i class="fab fa-twitter-square ms-3"></i>
-            <i class="fab fa-instagram-square ms-3"></i>
-            <i class="fab fa-youtube-square ms-3"></i></p>
+        <p class="m-0 text-center text-white">Made by Marko</p>
+        <p class="m-0 text-center text-white">Follow us:<a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square ms-3"></i></a>
+            <a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter-square ms-3"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram-square ms-3"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube-square ms-3"></i></p></a>         
     </footer>
 
 
@@ -164,9 +164,20 @@
                 if(occupied_dates[i] == dateCorected) {
                     document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red';
                     document.getElementById("Table"+occupied_tables[i]).removeAttribute('onclick');
+                    document.getElementById("Table"+occupied_tables[i]).addEventListener("click", () => {
+                        document.getElementById("msg3").innerHTML = `That table is already occupied!`
+                        document.getElementById("msg3").style.backgroundColor = ' rgb(250, 161, 126)'
+                        setTimeout(() => {
+                            document.getElementById("msg3").innerHTML = '';
+                            document.getElementById("msg3").style.backgroundColor = 'transparent';
+                        }, 2000);
+                    } )
+                    
                 }
             }
         }
+
+       
 
         function inputDataWindow(){
             let reservation_container = document.getElementById("reservation")
@@ -174,19 +185,25 @@
             }
         
         
-        function edit(date_id){  
-            document.getElementById("edit_reservation" + date_id).removeAttribute("hidden")
-            let edit_form = document.getElementById("edit_form")
-            let reservation_id = parseInt(date_id) + 165
-            
-            {% for reservation in reservations %}
-                if ({{reservation.id}} == reservation_id) {
-                    document.getElementById("new_phone" + date_id).setAttribute("placeholder", `{{reservation.phone_number}}`);
-                    document.getElementById("new_comment" + date_id).setAttribute("placeholder", `{{reservation.comment}}`);
+        function edit(date_id) {
+            if (document.getElementById("reservation").hidden) {
+                document.getElementById("edit_reservation" + date_id).removeAttribute("hidden");
+                let edit_form = document.getElementById("edit_form" + date_id);
+                let reservation_id = parseInt(date_id) + 165;
+                let phonePlaceholder = "";
+                let commentPlaceholder = "";
 
-                }
-            {% endfor %}
-        } 
+                {% for reservation in reservations %}
+                    if ({{reservation.id}} === reservation_id) {
+                        phonePlaceholder = "{{reservation.phone_number}}";
+                        commentPlaceholder = "{{reservation.comment}}";
+                    }
+                {% endfor %}
+
+                document.getElementById("new_phone" + date_id).setAttribute("placeholder", phonePlaceholder);
+                document.getElementById("new_comment" + date_id).setAttribute("placeholder", commentPlaceholder);
+            }
+        }
 
         function close_edit_container(date_id) {
             document.getElementById("edit_reservation" + date_id).setAttribute('hidden', 'true');
