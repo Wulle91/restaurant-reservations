@@ -54,10 +54,9 @@
     width: 100%;
 }
 
-#buttons a, div{
+#buttons {
     display: inline-block;
 }
-
 
 #image-container {
     width: 638px;
@@ -185,14 +184,33 @@
     display: block;
 }
 
+#msg2 {
+    text-align-last: center;
+    padding-top: 30px;
+    font-size: 1.22rem;
+    border-radius: 40px;
+   
+    border: 10px solid white;
+}
 
-@media (max-width: 650px) {
+#msg-cont {
+    z-index: 99;
+}
+
+
+
+@media (max-width: 635px) {
     #image-container {
-        height: 0;
-        background-image: none;
+        width: 100%;
+        background-image: url('https://res.cloudinary.com/dzwpkjbhq/image/upload/v1689680506/static/summernote/Coffee-Shop-Layout-3D_tables_wf0whf.jpg');
+        background-size: contain;
+    }
+
+    .labl {
+        margin-top: 80%;
     }
     #tables {
-        
+        margin-top: 0;
         text-align: center;
     }
     .Table {
@@ -217,5 +235,32 @@
         position: relative;
         margin-left: 0;
         margin-top: 0;
+    }
+
+    #reservation {
+        width: 90%;
+    }
+
+    .edit_reservation {
+        width: 90%;
+    }
+}
+
+@media (max-width: 375px) {
+    #image-container {
+        padding-top: 80%;
+    }
+    .labl {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .Table {
+        width: 90%;
+        margin-top: 10px;;
+    }
+
+    #your_reservations {
+        margin-top: 25%;
     }
 }

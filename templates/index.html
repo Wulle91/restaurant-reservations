@@ -10,30 +10,36 @@
     <div  id="date-container">
         <h2>To Book a Table first chose a date and than a table.</h2>
         <label for="start">Chose your date:</label>
-
         <input type="date" id="date" name="reservation_date" min="{{ today }}"max="2030-12-31" required>
     </div>
+    
+            <div class="col-md-8 offset-md-2 msg-cont">
+                <div class="alert {{message.tags}} alert-dismissible fade show" id="msg2" role="alert">
+                </div>
+            </div>
+
    
     <div id="tables">
+   
         <div id="image-container">
             <label class="labl">
-                <input type="radio" id="table1" name="Table" value="1" onclick="alert(`Please select a date first.`)"/>
+                <input type="radio" id="table1" name="Table" value="1" onclick="message()"/>
                 <div class="Table" id="Table1">Table 1</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table2" name="Table" value="2" onclick="alert(`Please select a date first.`)"/>
+                <input type="radio" id="table2" name="Table" value="2" onclick="message()"/>
                 <div class="Table" id="Table2">Table 2</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table3" name="Table" value="3" onclick="alert(`Please select a date first.`)"/>
+                <input type="radio" id="table3" name="Table" value="3" onclick="message()"/>
                 <div class="Table" id="Table3">Table 3</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table4" name="Table" value="4" onclick="alert(`Please select a date first.`)"/>
+                <input type="radio" id="table4" name="Table" value="4" onclick="message()"/>
                 <div class="Table" id="Table4">Table 4</div>
             </label>
             <label class="labl">
-                <input type="radio" id="table5" name="Table" value="5" onclick="alert(`Please select a date first.`)"/>
+                <input type="radio" id="table5" name="Table" value="5" onclick="message()"/>
                 <div class="Table" id="Table5">Table 5</div>
             </label>
         </div>
@@ -73,6 +79,7 @@
         {% for date in dates %}
                 <li id="reservation_list" class="your_booked-dates" hidden>
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
+                        <br>
                         <button id="edit{{ date.id }}" onclick="edit('{{ date.id }}')">Edit</button>
                         <button id="delete_comment_btn{{ date.id }}" onclick="open_delete_window('{{ date.id }}')">Delete</button>
                         <div id="delete_date{{ date.id }}" hidden>
@@ -98,19 +105,12 @@
                                 <textarea name="new_comment" id="new_comment{{ date.id }}" rows="5"></textarea>
                             </div>
                             <div id="buttons">
-                                
                                 <button type="submit">Edit</button>
-                                
-                                <div id="close_button">
-                                    <button type="button" onclick="close_edit_container('{{ date.id }}')">Cancel</button>
-                                </div>
-                                
+                                <button type="button" onclick="close_edit_container('{{ date.id }}')">Cancel</button>
                             </div>
-                            
                         </div>
                     </form>      
-                </li>  
-                
+                </li>
         {% endfor %} 
     </div>
     

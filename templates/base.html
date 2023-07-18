@@ -125,13 +125,21 @@
             liElements[indexes[i]].removeAttribute('hidden')
         }
 
+        function message() {
+            document.getElementById("msg2").innerHTML = 'Please select date first!'
+            document.getElementById("msg2").style.backgroundColor = ' rgb(250, 161, 126)'
+        }
+
         var date = document.getElementById('date')
         date.addEventListener("change",() =>{
-            for (let i=0; i<occupied_dates.length; i++) {
-            document.getElementById("table"+occupied_tables[i]).removeAttribute('onclick');
-            };
             addOnclick();
             searchDates();
+            if (document.getElementById("msg2").innerHTML != ""){
+                document.getElementById("msg2").remove();
+                for (let i=0; i<occupied_dates.length; i++) {
+                document.getElementById("table"+occupied_tables[i]).removeAttribute('onclick');
+                }
+            }  
         });
 
         function addOnclick() {
@@ -142,7 +150,7 @@
        
         function searchDates() {
             for (let i=0; i<occupied_dates.length; i++) {
-                document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='white'
+                document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='rgb(161, 208, 219)'
                 document.getElementById("Table"+occupied_tables[i]).setAttribute('onclick', 'inputDataWindow()');
             }
             let clickedDate = new Date(event.target.value); 
