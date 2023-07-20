@@ -29,6 +29,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 ALLOWED_HOSTS = ['restreservations.herokuapp.com', 'localhost', '8000-wulle91-restaurantreser-w86mdxqozjr.ws-eu101.gitpod.io']
 
 
