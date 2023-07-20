@@ -224,6 +224,6 @@ Overall, this experience has taught me the importance of carefully considering t
 
 ### Code Used
 
-I used our walktrought project as a template, I changed all the moels and adjusted it to my needs. I look for ideas on StackOverflow, how they solved various problems i encounterd in my project.
+I used our walktrought project as a template, I changed all the models and adjusted it to my needs. I looked for ideas on Stackoverflow and how other people solved various problems i encounterd in my project.
 
 
