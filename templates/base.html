@@ -99,7 +99,7 @@
     </footer>
 
     <script>
-
+        // data sent to emailjs for automatic email confirmation
         function sendMail(contactForm) {
             emailjs.send("service_gcql1ag","template_plus06x", {
                 "from_name": contactForm.name.value,
@@ -108,7 +108,7 @@
                 "table_nr": contactForm.Table.value,
             })
         }
-
+        // Making lists of data in database
         var occupied_dates = [];
         var occupied_tables = [];
         {% for date in dates %}
@@ -140,12 +140,12 @@
         for (let i=0; i<indexes.length; i++){
             liElements[indexes[i]].removeAttribute('hidden')
         }
-
+        // messages in Book A table to wsrn user that they have to choose date first
         function message() {
             document.getElementById("msg2").innerHTML = 'Please select date first!'
             document.getElementById("msg2").style.backgroundColor = ' rgb(250, 161, 126)'
         }
-
+        // on data change show occupied tables for that date and allow to onclick open form for table if not occupoied
         var date = document.getElementById('date')
         date.addEventListener("change",() =>{
             addOnclick();
@@ -157,13 +157,13 @@
                 }
             }  
         });
-
+        // onclick atribute for tables
         function addOnclick() {
             for (let i = 1; i <= 5; i++) {
                 document.getElementById("Table" + i).onclick = inputDataWindow;
             }
         }
-       
+        // searching witch tbles are occupied on selected date, painting them red and unabling if occupied 
         function searchDates() {
             for (let i=0; i<occupied_dates.length; i++) {
                 document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='rgb(161, 208, 219)'
@@ -194,13 +194,13 @@
         }
 
        
-
+        //show form window on cliked table
         function inputDataWindow(){
             let reservation_container = document.getElementById("reservation")
                 reservation_container.removeAttribute("hidden")
             }
         
-        
+        //edit reservation 
         function edit(date_id) {
             if (document.getElementById("reservation").hidden) {
                 let editReservations = document.getElementsByClassName("edit_reservation");
@@ -228,33 +228,33 @@
             }
         }
 
-
+        //cancel function on edit container
         function close_edit_container(date_id) {
             document.getElementById("edit_reservation" + date_id).setAttribute('hidden', 'true');
         }
-
+        // confirm deletion
         function confirm_comment_delete(x) {
             document.getElementById("delete_comment" + x).removeAttribute('hidden');
             document.getElementById("delete_comment_button" + x).setAttribute('hidden', 'true');
         }
-
+        // cancel on are you sure
         function close_delete_comment(x) {
             document.getElementById("delete_comment" + x).setAttribute('hidden', 'true');
             document.getElementById("delete_comment_button" + x).removeAttribute('hidden');
         }
-
+        // function on fist click on delete
         function open_delete_window(x) {
             document.getElementById("delete_date" + x).removeAttribute('hidden');
             document.getElementById("delete_comment_btn" + x).setAttribute('hidden', 'true');
             document.getElementById("edit" + x).setAttribute('hidden', 'true');
         }
-
+        // cancel in first delete window
         function close_delete_window(x) {
             document.getElementById("delete_date" + x).setAttribute('hidden', 'true');
             document.getElementById("delete_comment_btn" + x).removeAttribute('hidden');
             document.getElementById("edit" + x).removeAttribute('hidden');
         }
-
+        // cacel for for booking a table
         function close_reservation_window() {
             document.getElementById("reservation").setAttribute('hidden', 'true');
         }
