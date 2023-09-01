@@ -18,5 +18,5 @@ sqlparse==0.4.4
 django-crispy-forms==2.0
 bootstrap4==0.1.0
 crispy-bootstrap4==2022.1
-django-cors-headers==0.54.0
+django-cors-headers==4.2.0
 djangorestframework-simplejwt== 5.3.0
