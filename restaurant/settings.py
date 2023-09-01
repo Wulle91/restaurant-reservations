@@ -27,11 +27,11 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-ALLOWED_HOSTS = ['restreservations.herokuapp.com', 'localhost', '8000-wulle91-restaurantreser-w86mdxqozjr.ws-eu101.gitpod.io']
+ALLOWED_HOSTS = ['restreservations.herokuapp.com', 'localhost', '8000-wulle91-restaurantreser-tlg17iym0ze.ws-eu104.gitpod.io']
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'reservations',
+    'crispy_bootstrap4'
 ]
 
 SITE_ID = 1

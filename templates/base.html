@@ -100,6 +100,7 @@
 
     <script>
         // data sent to emailjs for automatic email confirmation
+        
         function sendMail(contactForm) {
             emailjs.send("service_gcql1ag","template_plus06x", {
                 "from_name": contactForm.name.value,
@@ -108,6 +109,8 @@
                 "table_nr": contactForm.Table.value,
             })
         }
+
+        
         // Making lists of data in database
         var occupied_dates = [];
         var occupied_tables = [];
@@ -117,9 +120,7 @@
             occupied_dates.push(date.slice(0,-10))
             occupied_tables.push(table)
         {% endfor %}
-        
         var emails = []
-    
         {% for reservation in reservations %}
             var email = "{{reservation.email}}"
             emails.push(email)   
@@ -128,7 +129,6 @@
         let liElements = document.getElementsByClassName('your_booked-dates');
         var indexes = getAllIndexes(emails, "{{user.email}}");
         var tables = document.getElementsByClassName('Table');
- 
         function getAllIndexes(arr, val) {
             var indexes = [], i = -1;
             while ((i = arr.indexOf(val, i+1)) != -1){
@@ -140,6 +140,7 @@
         for (let i=0; i<indexes.length; i++){
             liElements[indexes[i]].removeAttribute('hidden')
         }
+
         // messages in Book A table to wsrn user that they have to choose date first
         function message() {
             document.getElementById("msg2").innerHTML = 'Please select date first!'
@@ -147,9 +148,9 @@
         }
         // on data change show occupied tables for that date and allow to onclick open form for table if not occupoied
         var date = document.getElementById('date')
-        date.addEventListener("change",() =>{
+        date.addEventListener("change", (event) =>{
             addOnclick();
-            searchDates();
+            searchDates(event);
             if (document.getElementById("msg2").innerHTML != ""){
                 document.getElementById("msg2").remove();
                 for (let i=0; i<occupied_dates.length; i++) {
@@ -164,6 +165,7 @@
             }
         }
         // searching witch tbles are occupied on selected date, painting them red and unabling if occupied 
+        
         function searchDates() {
             for (let i=0; i<occupied_dates.length; i++) {
                 document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='rgb(161, 208, 219)'
@@ -176,19 +178,29 @@
                 day: 'numeric', 
             });
             var dateCorected = formattedDate
-            for (let i=0; i<occupied_dates.length; i++) {
-                if(occupied_dates[i] == dateCorected) {
-                    document.getElementById("Table"+occupied_tables[i]).style.backgroundColor='red';
-                    document.getElementById("Table"+occupied_tables[i]).removeAttribute('onclick');
-                    document.getElementById("Table"+occupied_tables[i]).addEventListener("click", () => {
+            for (let i = 0; i < occupied_dates.length; i++) {
+                let dateParts = occupied_dates[i].split('-');
+                let year = dateParts[0];
+                let month = dateParts[1];
+                let day = dateParts[2];
+                let longDate = new Date(`${month} ${day}, ${year}`);
+                longDate = longDate.toLocaleDateString("en-US", {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
+                if (longDate === dateCorected) {
+                    document.getElementById("Table" + occupied_tables[i]).style.backgroundColor = 'red';
+                    document.getElementById("Table" + occupied_tables[i]).removeAttribute('onclick');
+                    document.getElementById("Table" + occupied_tables[i]).addEventListener("click", () => {
                         document.getElementById("msg3").innerHTML = `That table is already occupied!`
-                        document.getElementById("msg3").style.backgroundColor = ' rgb(250, 161, 126)'
+                        document.getElementById("msg3").style.backgroundColor = 'rgb(250, 161, 126)'
                         setTimeout(() => {
                             document.getElementById("msg3").innerHTML = '';
                             document.getElementById("msg3").style.backgroundColor = 'transparent';
                         }, 2000);
-                    } )
-                    
+                    });
                 }
             }
         }
@@ -212,7 +224,7 @@
 
                 document.getElementById("edit_reservation" + date_id).removeAttribute("hidden");
                 let edit_form = document.getElementById("edit_form" + date_id);
-                let reservation_id = parseInt(date_id) + 165;
+                let reservation_id = parseInt(date_id) + 169;
                 let phonePlaceholder = "";
                 let commentPlaceholder = "";
 

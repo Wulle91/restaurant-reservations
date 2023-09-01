@@ -10,9 +10,9 @@ from .forms import CommentForm
 # Create your views here.
 
 def sho_dates(request):
-    dates = Date.objects.all()
+    dates = Date.objects.all().order_by('id')
     today = date.today().strftime("%Y-%m-%d")
-    reservations = Reservation.objects.all()
+    reservations = Reservation.objects.all().order_by('id')
     context = {
         'dates': dates,
         'reservations': reservations,
@@ -60,7 +60,7 @@ def delete_comment(request, comment_id):
     return redirect('home')
 
 def delete_reservation(request, date_id):
-    reservation_id = int(date_id) + 165
+    reservation_id = int(date_id) + 169
     reservation = get_object_or_404(Reservation, id=reservation_id)
     date = get_object_or_404(Date, id=date_id)
     reservation.delete()
@@ -69,7 +69,7 @@ def delete_reservation(request, date_id):
 
 
 def edit_reservation(request, date_id):
-    reservation_id = int(date_id) + 165
+    reservation_id = int(date_id) + 169
     reservation = get_object_or_404(Reservation, id=reservation_id)
     if request.method == 'POST':
         reservation.phone_number = request.POST.get('new_phone_number')  

@@ -73,7 +73,7 @@
 
 {% if user.is_authenticated %}   
     <div id="your_reservations">
-        <h2>Your reservations:</h2>   
+        <h2>Your reservations:</h2>
         {% for date in dates %}
                 <li id="reservation_list" class="your_booked-dates" hidden>
                     <p>You booked Table {{date.table}} for {{ date.reservation_date|date:"F j, Y" }}
